@@ -15,12 +15,24 @@ The project consists of an Bash script that automatically updates Plex Media Ser
 
 <h2>Setup</h2>
 
-<p align="center">
-Dell Service Tag and Express Service Code: <br/>
-<img src="https://i.imgur.com/xsfMD1q.png" height="80%" width="80%" alt="Dell Service Tag and Express Service Code"/>
-<br />
-<br />
-</p>
+- Create the plex_updater directory:</br>
+  $ sudo mkdir /opt/plex_updater
+
+- Create /opt/plex_updater/plex_updater.sh and copy the contents of 
+  plex_updater.sh.txt into /opt/plex_updater/plex_updater.sh:</br>
+  $ sudo nano /opt/plex_updater/plex_updater.sh
+
+- Grant the execute permissions to /opt/plex_updater/plex_updater.sh:</br>
+  $ sudo chmod +x /opt/plex_updater/plex_updater.sh
+
+- Setup Cron Job to run the plex_updater.sh script at selected time:</br>
+  $ sudo crontab -e
+
+- Add the following lines to crontab:</br>
+  <span>#</span> Run plex_updater.sh every day at 12:00am.</br>
+  0 0 * * * /opt/plex_updater/plex_updater.sh > /dev/null 2>&1
+</br>
+</br>
 
 <!--
  ```diff
