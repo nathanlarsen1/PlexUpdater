@@ -1,0 +1,38 @@
+#!/bin/sh
+
+# This script checks if installed version of Plex Media Server is up to date.
+# If it is not, then it downloads and installs the newest version of Plex Media Server.
+# Written by Nathan Larsen
+
+# Revision: 04242019.2300
+
+# Retrieve installed version number of Plex Media Server
+PLEX_MEDIA_SERVER_INSTALL_PATH="/usr/lib/plexmediaserver"
+export LD_LIBRARY_PATH=${PLEX_MEDIA_SERVER_INSTALL_PATH}
+PLEX_MEDIA_SERVER_INSTALLED_VERSION=$(${PLEX_MEDIA_SERVER_INSTALL_PATH}/Plex\ Media\ Server --version | sed -e 's/[v]\(.*\)/\1/')
+unset LD_LIBRARY_PATH
+
+# Retrieve newest version number of Plex Media Server from Plex website
+API_URL="https://plex.tv/api/downloads/1.json"
+API_URL_OUTPUT=$(curl -sL ${API_URL})
+PLEX_MEDIA_SERVER_DOWNLOAD_URL=$(echo ${API_URL_OUTPUT} | grep -Po '(?<="Ubuntu \(16.04\+\) / Debian \(8\+\) - Intel/AMD 64-bit","build":"linux-x86_64","distro":"debian","url":")[^"]*(deb)')
+PLEX_MEDIA_SERVER_WEB_VERSION=$(echo ${PLEX_MEDIA_SERVER_DOWNLOAD_URL} | sed -e 's/.*_\(.*\)_.*/\1/')
+
+echo "Plex Media Server installed version: ${PLEX_MEDIA_SERVER_INSTALLED_VERSION}"
+echo "Plex Media Server newest version: ${PLEX_MEDIA_SERVER_WEB_VERSION}"
+
+# Check if installed version is older than the web version
+if [ ${PLEX_MEDIA_SERVER_INSTALLED_VERSION} != ${PLEX_MEDIA_SERVER_WEB_VERSION} ]; then
+
+# Download newest version of Plex Media Server
+echo
+wget ${PLEX_MEDIA_SERVER_DOWNLOAD_URL}
+
+# Install newest version of Plex Media Server
+echo
+PLEX_MEDIA_SERVER_INSTALLER_FILENAME=$(basename ${PLEX_MEDIA_SERVER_DOWNLOAD_URL})
+sudo dpkg -i ${PLEX_MEDIA_SERVER_INSTALLER_FILENAME}
+
+# Delete Plex Media Server installation file
+rm ${PLEX_MEDIA_SERVER_INSTALLER_FILENAME}
+fi
