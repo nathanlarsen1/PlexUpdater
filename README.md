@@ -1,4 +1,4 @@
-<h1>Plex Updater</h1>
+<h1>Plex Updater on Ubuntu Linux Server</h1>
 
 
 <h2>Description</h2>
