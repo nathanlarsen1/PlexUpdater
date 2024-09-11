@@ -13,7 +13,7 @@ The project consists of an Bash script that automatically updates Plex Media Ser
 
 - <b>Ubuntu 22.04.4 LTS</b>
 
-<h2>Program notifications</h2>
+<h2>Setup</h2>
 
 <p align="center">
 Dell Service Tag and Express Service Code: <br/>
