@@ -2,7 +2,7 @@
 
 
 <h2>Description</h2>
-The project consists of a Bash script that automatically updates Plex Media Server on an Ubuntu Linux server. The script starts by determining the installed version of Plex Media Server. It then downloads a JSON file from the Plex website and processes the data to determine the latest version available. Next, it compares the installed version to the version on the website. If the version on the website is newer, the script downloads the installation file and installs the latest version of Plex Media Server. After the installation is finished, the script deletes the installation file.<br/>
+This project consists of a Bash script that automatically updates Plex Media Server on an Ubuntu Linux server. The script starts by determining the installed version of Plex Media Server. It then downloads a JSON file from the Plex website and processes the data to determine the latest version available. Next, it compares the installed version to the version on the website. If the version on the website is newer, the script downloads the installation file and installs the latest version of Plex Media Server. After the installation is finished, the script deletes the installation file.<br/>
 
 <h2>Language and Applications</h2>
 
