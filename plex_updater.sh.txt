@@ -2,15 +2,20 @@
 
 # This script checks if installed version of Plex Media Server is up to date.
 # If it is not, then it downloads and installs the newest version of Plex Media Server.
+# This script is intended to be used on Ubuntu 16.04 and newer.
 # Written by Nathan Larsen
 
-# Revision: 04242019.2300
+# Revision: 01162025.1130
 
 # Retrieve installed version number of Plex Media Server
 PLEX_MEDIA_SERVER_INSTALL_PATH="/usr/lib/plexmediaserver"
+if [ -d ${PLEX_MEDIA_SERVER_INSTALL_PATH} ]; then
 export LD_LIBRARY_PATH=${PLEX_MEDIA_SERVER_INSTALL_PATH}
 PLEX_MEDIA_SERVER_INSTALLED_VERSION=$(${PLEX_MEDIA_SERVER_INSTALL_PATH}/Plex\ Media\ Server --version | sed -e 's/[v]\(.*\)/\1/')
 unset LD_LIBRARY_PATH
+else
+PLEX_MEDIA_SERVER_INSTALLED_VERSION=0
+fi
 
 # Retrieve newest version number of Plex Media Server from Plex website
 API_URL="https://plex.tv/api/downloads/1.json"
